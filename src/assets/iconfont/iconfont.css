@@ -1,0 +1,143 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3989864 */
+  src: url('iconfont.woff2?t=1681046344434') format('woff2'),
+       url('iconfont.woff?t=1681046344434') format('woff'),
+       url('iconfont.ttf?t=1681046344434') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-danquxunhuan:before {
+  content: "\e6a2";
+}
+
+.icon-liebiaoxunhuan:before {
+  content: "\e6a3";
+}
+
+.icon-zanting:before {
+  content: "\e669";
+}
+
+.icon-bofang1:before {
+  content: "\e620";
+}
+
+.icon-quanping:before {
+  content: "\e655";
+}
+
+.icon-xiangxia:before {
+  content: "\e634";
+}
+
+.icon-caozuo-xunhuan1:before {
+  content: "\e62b";
+}
+
+.icon-yinliang:before {
+  content: "\e61c";
+}
+
+.icon-shangyishou:before {
+  content: "\e63e";
+}
+
+.icon-xiayishou:before {
+  content: "\e63f";
+}
+
+.icon-xiazai:before {
+  content: "\e639";
+}
+
+.icon-_pinglun:before {
+  content: "\e627";
+}
+
+.icon-zanting2:before {
+  content: "\e629";
+}
+
+.icon-shoucang:before {
+  content: "\e63d";
+}
+
+.icon-bofangjilu:before {
+  content: "\e8ad";
+}
+
+.icon-bofang:before {
+  content: "\e710";
+}
+
+.icon-guanbi:before {
+  content: "\eb6a";
+}
+
+.icon-datumoshi:before {
+  content: "\e600";
+}
+
+.icon-31liebiao:before {
+  content: "\e601";
+}
+
+.icon-zuixiaohua3:before {
+  content: "\e62d";
+}
+
+.icon-pifu:before {
+  content: "\e647";
+}
+
+.icon-yinle1:before {
+  content: "\e60d";
+}
+
+.icon-zuojiantou_huaban:before {
+  content: "\e63b";
+}
+
+.icon-youjiantou_huaban:before {
+  content: "\e63c";
+}
+
+.icon-sousuo:before {
+  content: "\e60e";
+}
+
+.icon-chuangkouhuanyuan:before {
+  content: "\e65b";
+}
+
+.icon-yinle:before {
+  content: "\e644";
+}
+
+.icon-leidatance:before {
+  content: "\e901";
+}
+
+.icon-bingtutongji:before {
+  content: "\e662";
+}
+
+.icon-24gf-playlistMusic4:before {
+  content: "\ea86";
+}
+
+.icon-shipin:before {
+  content: "\e626";
+}
+
+.icon-tv-full:before {
+  content: "\e926";
+}
+
