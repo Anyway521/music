@@ -1,0 +1,23 @@
+@forward 'element-plus/theme-chalk/src/common/var.scss' with (
+  $colors: (
+    'primary': (
+      'base': green,
+    ),
+  )
+);
+
+*{
+    user-select: none;
+}
+
+:root {
+  --swiper-theme-color: #1ecc95 !important;
+  --el-color-primary: #1ecc95 !important;
+  --el-menu-active-color: #1ecc95 !important;
+  --el-menu-hover-bg-color: transparent !important;
+  --el-menu-item-height: 40px;
+  --el-border-color-lighter: transparent;
+  --el-fill-color-blank: transparent;
+  --el-bg-color: transparent;
+  --el-fill-color-light: transparent;
+}
