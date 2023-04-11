@@ -9,9 +9,11 @@ import { useRoute } from 'vue-router';
 import Songlist from './songlist.vue';
 // import Songlist from '../comp/list.vue';
 import { SongItem } from '@/types/songlist';
+import { useMainStore } from '@/store/main';
 
 // const player = usePlayerStore();
 // const { currMusic, currMusicStack, currIndex } = storeToRefs(player);
+const main = useMainStore();
 const searchStore = useSearchStore();
 const route = useRoute();
 const keywords = computed(() => {
@@ -48,14 +50,14 @@ watch(keywords, (value) => {
 
 </script>
 <template>
-    <div class="song-detail">
+    <div :class="['song-detail', { dark: main.theme }]">
         <div class="song-detail__result">
             搜索 <span>{{ route.params.keywords || '' }}</span>
         </div>
         <div>
             <!-- <songlist :music-list="currMusicStack" 
-                      :set-row-class="setRowClass"
-                      :play-music="playMusic"/> -->
+                              :set-row-class="setRowClass"
+                              :play-music="playMusic"/> -->
             <songlist />
         </div>
     </div>
@@ -67,10 +69,18 @@ watch(keywords, (value) => {
         line-height: 50px;
         text-indent: 1em;
         background-color: #f0f0f0;
+        margin: 10px 0;
+        border-radius: 5px;
         color: #57555f;
 
         span {
             font-weight: bold;
+        }
+    }
+
+    &.dark {
+        .song-detail__result {
+            background-color: wheat;
         }
     }
 }

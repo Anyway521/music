@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 头部
 import { Search } from '@element-plus/icons-vue';
-import { onMounted, onUnmounted, ref, watch } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMainStore } from '@/store/main';
 import { useSearchStore } from '@/store/search';
@@ -11,6 +11,7 @@ const layer1 = ref<NullAble<HTMLElement>>(null);
 const layer2 = ref<NullAble<HTMLElement>>(null);
 const input = ref<NullAble<HTMLInputElement>>(null);
 const searchText = ref('');
+const main = useMainStore();
 const router = useRouter();
 const goBack = () => {
     router.back();
@@ -76,7 +77,7 @@ const onLayerClick = (event: Event) => {
 
 </script>
 <template>
-    <div class="header">
+    <div :class="['header', { 'dark': main.theme }]">
         <div class="header-left">
             <div class="header-left__btn">
                 <i class="iconfont icon-zuojiantou_huaban" @click="goBack" :title="'后退'"></i>
@@ -260,6 +261,15 @@ const onLayerClick = (event: Event) => {
                 margin-left: 14px;
                 font-style: normal;
             }
+        }
+    }
+
+    &.dark {
+
+        .header-left__search-hot,
+        .header-left__search-result {
+            background-color: #333;
+            box-shadow: 1px 1px 2px 1px #5f6166;
         }
     }
 }
