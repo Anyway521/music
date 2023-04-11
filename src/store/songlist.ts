@@ -37,15 +37,9 @@ export const useSongListStore = defineStore('songlist', () => {
         info.value = list ?? {};
     }
 
-    // 处理标签tags:string[]
-    const getRealName = (singers: Singer[]) => {
-        return singers.map(el => el.name).join('&')
-    }
-
     return {
         info,
         getList,
-        getRealName,
         songList,
     }
 

@@ -37,7 +37,7 @@ watch(singerType, (value) => {
 <template>
     <div class="singer">
         <div class="singer-radio">
-            <el-radio-group v-model="singerType" fill="#1ed0a2">
+            <el-radio-group v-model="singerType" fill="#1ed0a2" size="small">
                 <el-radio-button v-for="(item, index) in Object.values(AREA_MAP)" :label="index">
                     {{ item }}
                 </el-radio-button>
@@ -58,7 +58,7 @@ watch(singerType, (value) => {
 <style lang="scss" scoped>
 .singer {
     &-radio {
-        margin: 20px 10px;
+        margin: 10px;
     }
 
     &-main {

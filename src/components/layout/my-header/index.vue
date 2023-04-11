@@ -1,9 +1,15 @@
 <script setup lang="ts">
 // 头部
 import { Search } from '@element-plus/icons-vue';
-import { ref } from 'vue';
+import { onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useMainStore } from '@/store/main';
+import { useSearchStore } from '@/store/search';
+import debounce from 'lodash/debounce';
+
+const layer1 = ref<NullAble<HTMLElement>>(null);
+const layer2 = ref<NullAble<HTMLElement>>(null);
+const input = ref<NullAble<HTMLInputElement>>(null);
 const searchText = ref('');
 const router = useRouter();
 const goBack = () => {
@@ -12,7 +18,61 @@ const goBack = () => {
 const goForward = () => {
     router.forward();
 }
+const jumpToMusicDetails = debounce((keywords: string) => {
+    if (!keywords) {
+        alert('请输入要搜索的内容')
+        return;
+    }
+    setSearchText(keywords);
+    router.push({
+        name: 'song-detail',
+        params: {
+            keywords
+        }
+    })
+    isShow.value = false
+})
+
 const { switchTheme } = useMainStore();
+const isShow = ref(false);
+const showLayer = () => {
+    isShow.value = true
+}
+
+const hideLayer = () => {
+    isShow.value = false
+}
+
+const setSearchText = (txt: string) => {
+    searchText.value = txt
+}
+
+const searchStore = useSearchStore();
+onMounted(() => {
+    searchStore.getHotKeyWordsList();
+    document.addEventListener('click', onLayerClick)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', onLayerClick)
+})
+
+const getSuggestion = debounce(() => {
+    showLayer();
+    if (!searchText.value) {
+        return;
+    }
+    searchStore.getSuggestionList({ keywords: searchText.value })
+})
+
+const onLayerClick = (event: Event) => {
+    if ([input.value.ref, layer1.value, layer2.value].includes(event.target)) {
+        showLayer()
+    } else {
+        hideLayer()
+    }
+};
+
 
 </script>
 <template>
@@ -23,7 +83,25 @@ const { switchTheme } = useMainStore();
                 <i class="iconfont icon-youjiantou_huaban" @click="goForward" :title="'前进'"></i>
             </div>
             <div class="header-left__search">
-                <el-input v-model="searchText" class="w-50 m-2" placeholder="搜索音乐" :suffix-icon="Search" />
+                <el-input v-model="searchText" ref="input" class="w-50 m-2" placeholder="搜索音乐" :suffix-icon="Search"
+                    @focus="getSuggestion" @input="getSuggestion" @change="jumpToMusicDetails(searchText)" />
+                <div v-show="isShow && !searchText" ref="layer1" class="header-left__search-hot">
+                    <div class="title">热搜榜</div>
+                    <ul class="list">
+                        <li v-for="item in searchStore.keyWordsList" :key="item.first"
+                            @click.stop="jumpToMusicDetails(item.first)">{{ item.first }}</li>
+                    </ul>
+                </div>
+                <div v-show="isShow && searchText" ref="layer2" class="header-left__search-result">
+                    <div class="title">在线音乐</div>
+                    <ul class="list">
+                        <li v-for="item in searchStore.suggestKeyWordsList" :key="item.id"
+                            @click.stop="jumpToMusicDetails(item.name)">{{
+                                `${item.name} - ${item.artists.map(el => el.name).join('&') || ''} - ${item.album.name || ''}`
+                            }}
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="header-left__analysis">
                 <i class="iconfont icon-yinle1"></i>
@@ -68,8 +146,59 @@ const { switchTheme } = useMainStore();
             i.disabled {
                 color: red;
             }
+
             i:hover {
                 color: #1ec;
+            }
+        }
+
+        &__search {
+            position: relative;
+
+            &-result,
+            &-hot {
+                position: absolute;
+                top: 50px;
+                width: 230px;
+                min-height: 280px;
+                background: #f6f6f6;
+                box-shadow: 1px 1px 2px 1px #dadada;
+                border-radius: 10px;
+                padding: 10px 20px;
+                line-height: 24px;
+
+                .list {
+                    font-size: 14px;
+
+                    li {
+                        margin-left: -30px;
+                        width: 220px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    li:hover {
+                        color: #47d5a7;
+                        cursor: pointer;
+                    }
+                }
+
+                .close {
+                    position: absolute;
+                    right: 10px;
+                    bottom: 10px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+            }
+
+            &-result {
+                z-index: 998;
+            }
+
+            &-hot {
+                z-index: 999;
             }
         }
 
@@ -133,4 +262,5 @@ const { switchTheme } = useMainStore();
             }
         }
     }
-}</style>
+}
+</style>

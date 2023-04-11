@@ -57,7 +57,12 @@ const routes = [
     {
         path: '/detail/:id',
         name: 'detail',
-        component: () => import('@/views/my-detail/index.vue')
+        component: () => import('@/views/my-detail/songlist-detail/index.vue')
+    },
+    {
+        path: '/song-detail/:keywords',
+        name: 'song-detail',
+        component: () => import('@/views/my-detail/song-detail/index.vue')
     }
 ]
 

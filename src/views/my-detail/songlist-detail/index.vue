@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { onMounted } from 'vue';
 import { useSongListStore } from '@/store/songlist';
 // import { useBase64 } from '@/utils/base64';
-import SongList from './song-list.vue';
+import Songlist from './songlist.vue';
 // const { decodeBase64 } = useBase64();
 const route = useRoute();
 // const info = decodeBase64(route.params.info as string);
@@ -41,7 +41,7 @@ onMounted(() => {
             </div>
         </div>
         <div class="detail-main">
-            <song-list />
+            <songlist />
         </div>
     </div>
 </template>

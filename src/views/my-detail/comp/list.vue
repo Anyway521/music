@@ -1,60 +1,58 @@
 <script lang="ts" setup>
-import { useSongListStore } from '@/store/songlist';
 import { SongItem } from '@/types/songlist';
-import { usePlayerStore } from '@/store/player';
-import { storeToRefs } from 'pinia';
+// import { usePlayerStore } from '@/store/player';
 import { useMainStore } from '@/store/main';
+import { storeToRefs } from 'pinia';
+import { useSonglist } from '../comp/use-songlist';
+import { toRefs } from 'vue';
 const { theme } = storeToRefs(useMainStore());
-const songlistStore = useSongListStore();
-const player = usePlayerStore();
-const { currMusic, currMusicStack, currIndex } = storeToRefs(player);
-//在这里更新songList,
-const playMusic = (song: SongItem) => {
-    // player.setCurrMusic(song);
-    currMusicStack.value = songlistStore.songList;
-    currMusic.value = song;
-    currIndex.value = song.index || 0;
-    player.play();
-}
-const showPlayBtn = (target: NullAble<EventTarget>) => {
-    const dom = target as HTMLElement;
-    dom.classList.add('active')
-}
+// const player = usePlayerStore();
 
-const hidePlayBtn = (target: NullAble<EventTarget>) => {
-    const dom = target as HTMLElement;
-    dom.classList.remove('active')
-}
-const downloadMusic = async (song: SongItem) => {
-    if (song.url) {
-        window.location.href = song.url
-    } else {
-        alert('无法下载')
-    }
-}
-const setRowClass = ({ row }: { row: SongItem }) => {
-    if (row.id === currMusic.value.id) {
-        return 'music-active'
-    } return ''
-}
+// import { useSearchStore } from '@/store/search';
+// const searchStore = useSearchStore();
+// const { currMusic, currMusicStack, currIndex } = storeToRefs(player);
+//在这里更新songList,
+// const playMusic = (song: SongItem) => {
+//     currMusicStack.value = searchStore.songList;
+//     currMusic.value = song;
+//     currIndex.value = song.index || 0;
+//     player.play();
+// }
+const { showPlayBtn, hidePlayBtn, downloadMusic } = useSonglist();
+
+// const setRowClass = ({ row }: { row: SongItem }) => {
+//     if (row.id === currMusic.value.id) {
+//         return 'music-active'
+//     } return ''
+// }
+
+const props = withDefaults(defineProps<{
+    playMusic: (song: SongItem) => void;
+    setRowClass: ({ row }: { row: SongItem }) => string;
+    musicList: SongItem[]
+}>(), {
+    playMusic: () => { },
+    setRowClass: ({ row }: { row: SongItem }) => '',
+    musicList: () => []
+})
 
 </script>
 <template>
     <div :class="['song', { 'dark': theme }]">
-        <template v-if="songlistStore.songList.length">
-            <el-table :data="songlistStore.songList" class-name="song-table" :border="false" :row-class-name="setRowClass"
+        <template v-if="props.musicList.length">
+            <el-table :data="props.musicList" class-name="song-table" :border="false" :row-class-name="props.setRowClass"
                 @cell-mouse-enter="(row, column, cell, event) => showPlayBtn(event.target)"
                 @cell-mouse-leave="(row, column, cell, event) => hidePlayBtn(event.target)">
                 <el-table-column prop="name" label="歌曲" />
                 <el-table-column prop="ar" label="歌手">
                     <template #default="scope">
-                        {{ songlistStore.getRealName(scope.row.ar) }}
+                        {{ scope.row.ar.map((el: SongItem) => el.name).join('&') }}
                     </template>
                 </el-table-column>
                 <el-table-column prop="al.name" label="专辑" />
                 <el-table-column prop="id" label="" width="1" class-name="control">
                     <template #default="scope">
-                        <i class="iconfont icon-bofang" @click="playMusic(scope.row)"></i>
+                        <i class="iconfont icon-bofang" @click="props.playMusic(scope.row)"></i>
                         <i class="iconfont icon-xiazai" @click="downloadMusic(scope.row)"></i>
                     </template>
                 </el-table-column>
@@ -79,6 +77,7 @@ const setRowClass = ({ row }: { row: SongItem }) => {
             color: #1ed0a2;
             background-color: #ececec;
         }
+
         &:hover {
             background-color: #ececec;
         }

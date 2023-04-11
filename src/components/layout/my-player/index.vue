@@ -125,6 +125,8 @@ const switchModal = () => {
 
         .ava {
             width: 50px;
+            height: 50px;
+            object-fit: cover;
             border-radius: 4px;
             cursor: pointer;
 
