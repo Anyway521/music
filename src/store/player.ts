@@ -2,6 +2,7 @@ import { defineStore, acceptHMRUpdate } from 'pinia';
 import { ref } from 'vue';
 import debounce from 'lodash/debounce';
 import { SongItem } from '@/types';
+import img from '@/assets/img/logo.png';
 export const usePlayerStore = defineStore('player', () => {
     const audio = new Audio();
     const isPaused = ref(false);
@@ -14,7 +15,7 @@ export const usePlayerStore = defineStore('player', () => {
         al: {
             id: 0,
             name: '',
-            picUrl: 'public/logo.png'
+            picUrl: img
         },
         index: 0
     })
@@ -68,7 +69,6 @@ export const usePlayerStore = defineStore('player', () => {
     const playerPrev = () => {
         if (!currIndex.value) {
             currIndex.value = currMusicStack.value.length - 1;
-            // window.console.log('已经第一个啦')
             return;
         }
         currIndex.value--
@@ -76,7 +76,6 @@ export const usePlayerStore = defineStore('player', () => {
 
     const playerNext = () => {
         if (currIndex.value === currMusicStack.value.length - 1) {
-            // window.console.log('已经到底啦')
             currIndex.value = 0;
             return;
         }

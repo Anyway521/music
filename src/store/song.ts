@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { getSongURL } from '@/utils/api';
 import { SongParams, SongResponseItem } from '@/types/song';
 import { SongItem } from '@/types/songlist';
+import img from '@/assets/img/logo.png';
 export const useSongStore = defineStore('song', () => {
     const song = ref<NullAble<SongResponseItem>>(null);
     const info = ref<SongItem>({
@@ -12,7 +13,7 @@ export const useSongStore = defineStore('song', () => {
         al: {
             id: 0,
             name: '',
-            picUrl: 'public/logo.png'
+            picUrl: img
         },
         index: 0
     });

@@ -5,6 +5,7 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 // import { useChosenItem } from './use-chosen-item';
 // vue3bug,目前不支持从外部导入interface给defineProps用。只能在当前文件声明。
+import img from '@/assets/img/logo.png';
 interface ChosenProps {
     id: number;
     name?: string;
@@ -49,7 +50,7 @@ onUnmounted(() => {
 const props = withDefaults(defineProps<ChosenProps>(), {
     id: 0,
     name: '',
-    url: 'public/login.png',
+    url: img,
 })
 </script>
 <template>
