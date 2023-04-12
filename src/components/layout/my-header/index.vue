@@ -6,10 +6,12 @@ import { useRouter } from 'vue-router';
 import { useMainStore } from '@/store/main';
 import { useSearchStore } from '@/store/search';
 import debounce from 'lodash/debounce';
+import { ElInput } from 'element-plus'
+
 
 const layer1 = ref<NullAble<HTMLElement>>(null);
 const layer2 = ref<NullAble<HTMLElement>>(null);
-const input = ref<NullAble<HTMLInputElement>>(null);
+const myInput = ref<NullAble<typeof ElInput>>(null);
 const searchText = ref('');
 const main = useMainStore();
 const router = useRouter();
@@ -66,12 +68,17 @@ const getSuggestion = debounce(() => {
     searchStore.getSuggestionList({ keywords: searchText.value })
 })
 
-const onLayerClick = (event: Event) => {
-    if ([input.value.ref, layer1.value, layer2.value].includes(event.target)) {
-        showLayer()
-    } else {
-        hideLayer()
+const onLayerClick = (event: MouseEvent) => {
+    const input = myInput.value;
+    const e = event.target as HTMLElement;
+    if (input && e) {
+        if ([input.ref, layer1.value, layer2.value].includes(e)) {
+            showLayer()
+        } else {
+            hideLayer()
+        }
     }
+
 };
 
 
