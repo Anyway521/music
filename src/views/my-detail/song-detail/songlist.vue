@@ -3,7 +3,7 @@ import { SongItem } from '@/types/songlist';
 import { usePlayerStore } from '@/store/player';
 import { storeToRefs } from 'pinia';
 import { useMainStore } from '@/store/main';
-import { useSonglist } from '../comp/use-songlist';
+import { useSonglist } from '../hooks/use-songlist';
 import { useSearchStore } from '@/store/search';
 import { useFormat } from '@/utils/format';
 const { theme } = storeToRefs(useMainStore());

@@ -1,10 +1,12 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
+import img from '@/assets/img/logo.png';
+
 interface Props {
     bg: string
 }
 const props = withDefaults(defineProps<Props>(), {
-    bg: 'public/logo.png'
+    bg: img
 })
 const isShow = ref(false);
 const switchShow = () => {
@@ -112,10 +114,12 @@ defineExpose({
                 height: 500px;
                 display: grid;
                 place-items: center;
-                background-image: url('src/assets/img/diskk.png');
+                background: url('/src/assets/img/diskk.png');
                 background-size: cover;
                 img {
                     width: 100px;
+                    height: 100px;
+                    object-fit: cover;
                     margin-top: -20px;
                     border-radius: 50%;
                     border: 10px solid black;

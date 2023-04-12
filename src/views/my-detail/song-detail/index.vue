@@ -4,35 +4,15 @@ import { useSearchStore } from '@/store/search';
 import { computed } from '@vue/reactivity';
 import { onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
-// import { usePlayerStore } from '@/store/player';
-// import { storeToRefs } from 'pinia';
 import Songlist from './songlist.vue';
-// import Songlist from '../comp/list.vue';
-import { SongItem } from '@/types/songlist';
 import { useMainStore } from '@/store/main';
 
-// const player = usePlayerStore();
-// const { currMusic, currMusicStack, currIndex } = storeToRefs(player);
 const main = useMainStore();
 const searchStore = useSearchStore();
 const route = useRoute();
 const keywords = computed(() => {
     return route.params.keywords as string;
 })
-
-// const playMusic = (song: SongItem) => {
-//     currMusicStack.value = searchStore.songList;
-//     currMusic.value = song;
-//     currIndex.value = song.index || 0;
-//     player.play();
-// }
-
-// const setRowClass = ({ row }: { row: SongItem }) => {
-//     if (row.id === currMusic.value.id) {
-//         return 'music-active'
-//     } return ''
-// }
-
 
 onMounted(() => {
     if (!keywords.value) {
@@ -55,9 +35,6 @@ watch(keywords, (value) => {
             搜索 <span>{{ route.params.keywords || '' }}</span>
         </div>
         <div>
-            <!-- <songlist :music-list="currMusicStack" 
-                              :set-row-class="setRowClass"
-                              :play-music="playMusic"/> -->
             <songlist />
         </div>
     </div>
