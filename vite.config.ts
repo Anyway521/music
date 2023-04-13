@@ -26,37 +26,37 @@ export default defineConfig({
   server: {
     proxy: {
       '/personalized': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/personalized/, ''),
       },
       '/toplist': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/toplist/, ''),
       },
       '/playlist': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/playlist/, ''),
       },
       '/song': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/song/, ''),
       },
       '/top': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/top/, ''),
       },
       '/search': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/search/, ''),
       },
       '/cloudsearch': {
-        target: "http://127.0.0.1:3000",
+        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cloudsearch/, ''),
       },
