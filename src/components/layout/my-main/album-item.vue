@@ -28,7 +28,7 @@ withDefaults(defineProps<Props>(), {
 </script>
 <template>
     <div class="album-item" @click="jumpToDetails(id)">
-        <img :src="url" alt="">
+        <img v-lazy="url" alt="">
         <div class="album-item__title">{{ name }}</div>
         <div class="album-item__subcrible">
             <i class="iconfont icon-shoucang"></i>

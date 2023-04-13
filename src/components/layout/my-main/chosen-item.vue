@@ -55,7 +55,7 @@ const props = withDefaults(defineProps<ChosenProps>(), {
 </script>
 <template>
     <div class="chosen-item" ref="chose" @click="jumpToDetails(props.id)">
-        <img :src="props.url" alt="" >
+        <img v-lazy="props.url" alt="" >
         <div class="chosen-item__btn">
             <i class="iconfont icon-bofang1"></i>
         </div>

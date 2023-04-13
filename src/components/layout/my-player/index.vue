@@ -6,7 +6,7 @@ import { formatDuration } from '@/utils/time';
 import Detail from '@/components/layout/detail.vue';
 import { usePlayerStore } from '@/store/player';
 const playerStore = usePlayerStore();
-const { currIndex, currMusic, currMusicStack, playModel } = storeToRefs(playerStore);
+const { currIndex, currMusic, currMusicStack, playModel, isPaused } = storeToRefs(playerStore);
 
 const instance = getCurrentInstance();
 const volume = ref(playerStore.audio.volume * 100);
@@ -35,7 +35,8 @@ const updateDom = () => {
 }
 
 const endedMusic = () => {
-    playerStore.setIsPaused(true);
+    window.console.log('end')
+    isPaused.value = false;
     switch(playModel.value) {
         case true : {
             playerStore.playerNext();
@@ -78,7 +79,7 @@ const switchModal = () => {
         :show-text="false" color="#1ed0a2" />
     <div class="player">
         <div class="player-left">
-            <img :src="currMusic.al.picUrl" alt="" @click="switchModal" class="ava">
+            <img v-lazy="currMusic.al.picUrl" alt="" @click="switchModal" class="ava">
             <teleport to="body">
                 <detail :bg="currMusic.al.picUrl" ref="detail" />
             </teleport>
@@ -91,7 +92,7 @@ const switchModal = () => {
                :title="playModel ? '列表循环': '单曲循环'"
                 @click="playerStore.switchModel"></i>
             <i class="iconfont icon-shangyishou mid" @click="playerStore.playerPrev"></i> 
-            <i :class="['iconfont', 'play', playerStore.isPaused ? 'icon-bofang1' : 'icon-zanting']"
+            <i :class="['iconfont', 'play', isPaused ? 'icon-bofang1' : 'icon-zanting']"
                 @click="playerStore.switchState"></i>
             <i class="iconfont icon-xiayishou mid" @click="playerStore.playerNext"></i>
             <div class="volume" @mouseover="showV" @mouseout="hiddenV">

@@ -16,7 +16,7 @@ onMounted(() => {
 <template>
     <div class="detail">
         <div class="detail-top">
-            <img :src="songlistStore.info.coverImgUrl" alt="">
+            <img v-lazy="songlistStore.info.coverImgUrl" alt="">
             <div class="detail-top__right">
                 <h1>
                     {{ songlistStore.info.name }}

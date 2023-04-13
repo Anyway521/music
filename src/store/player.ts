@@ -5,7 +5,7 @@ import { SongItem } from '@/types';
 import img from '@/assets/img/logo.png';
 export const usePlayerStore = defineStore('player', () => {
     const audio = new Audio();
-    const isPaused = ref(false);
+    const isPaused = ref(true);
     const currIndex = ref(0);
     const playModel = ref(true);//播放模式，先只做单曲（false）和列表(true)循环。默认列表
     const currMusic = ref<SongItem>({
