@@ -26,37 +26,37 @@ export default defineConfig({
   server: {
     proxy: {
       '/personalized': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/personalized/, ''),
       },
       '/toplist': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/toplist/, ''),
       },
       '/playlist': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/playlist/, ''),
       },
       '/song': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/song/, ''),
       },
       '/top': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/top/, ''),
       },
       '/search': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/search/, ''),
       },
       '/cloudsearch': {
-        target: "https://netease-cloud-music-api-cyan-iota.vercel.app",
+        target: "https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cloudsearch/, ''),
       },
