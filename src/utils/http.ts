@@ -1,6 +1,6 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.baseURL = 'https://netease-cloud-music-api-cyan-iota.vercel.app/';
 axios.interceptors.request.use((config: AxiosRequestConfig | any) => {
     let timestamp = new Date().getTime();
     config = Object.assign(config, { withCredentials: true, timestamp });
