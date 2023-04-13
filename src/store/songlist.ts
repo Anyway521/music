@@ -20,7 +20,7 @@ export const useSongListStore = defineStore('songlist', () => {
             }).catch(err => {
                 window.console.error('获取歌单出错', err)
             })
-        const tracks = list.tracks;
+        const tracks = list.tracks || [];
         if (tracks.length) {
             let IDstr = tracks.map(el => el.id).join(',');
             await getSongURL({ id: IDstr })
