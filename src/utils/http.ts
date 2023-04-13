@@ -1,9 +1,11 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 
-axios.defaults.baseURL = 'https://service-e5yq02yy-1257391064.gz.apigw.tencentcs.com/';
+axios.defaults.baseURL = 'http://127.0.0.1:3000/';
 axios.interceptors.request.use((config: AxiosRequestConfig | any) => {
     let timestamp = new Date().getTime();
-    config = Object.assign(config, { withCredentials: true, timestamp });
+    config.withCredentials = true;
+    let params = config.params;
+    config.params = Object.assign(params, { timestamp })
     return config;
 });
 axios.interceptors.response.use(res => {
